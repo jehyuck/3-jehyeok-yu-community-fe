@@ -20,8 +20,8 @@ export function setOk(input, msg) {
 }
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const pwLenMin = 15;
-const pwLenMax = 55;
+const pwLenMin = 8;
+const pwLenMax = 20;
 const pwReHasLetter = /[A-Za-z]/;
 const pwReHasDigit = /[0-9]/;
 const pwReHasSpecial = /[^A-Za-z0-9]/;

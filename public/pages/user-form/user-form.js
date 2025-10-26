@@ -1,3 +1,4 @@
+import { authClient } from "../../api/apiClient.js";
 import { BASE_URL } from "../../api/config.js";
 import {
   submitPasswordUpdate,
@@ -6,6 +7,8 @@ import {
 } from "./submitHandler.js";
 import {
   updateSubmitDisabled,
+  validateEmail,
+  validateNickname,
   validatePassword,
   validatePasswordAll,
   validatePasswordConfirm,
@@ -88,6 +91,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
   if (mode !== "signup" && elements.emailSection) {
+    const res = await authClient.get("/users/me");
+    const dto = await res.json();
     if (elements.emailDupButton) {
       elements.emailDupButton.style.display = "none";
     }
@@ -100,7 +105,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       const email = elements.email;
       email.classList.add("readonly");
       email.setAttribute("readonly", "readonly");
-      email.placeholder = "";
+      email.placeholder = dto?.email;
+    }
+
+    if (mode === "profile" && elements.nickname) {
+      elements.nickname.textContent = dto?.nickname | undefined;
     }
   }
   function refreshButton() {
@@ -139,7 +148,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       refreshButton();
     });
   }
-
   refreshButton();
   submitBtn.addEventListener("click", async (e) => {
     e.preventDefault();

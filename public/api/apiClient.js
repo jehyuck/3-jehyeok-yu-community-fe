@@ -1,5 +1,6 @@
 import { BASE_URL } from "./config.js";
 import { deleteAccessToken, getAccessToken } from "./sessionStorage.js";
+const redirectLoading = false;
 
 const make =
   (client, method) =>
@@ -48,9 +49,8 @@ class AuthError extends Error {
   }
 }
 async function authFetch(path, opt = {}) {
-  const token = getAccessToken();
+  // const token = getAccessToken();
   const headers = {
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...(opt.headers || {}),
   };
 
@@ -61,9 +61,9 @@ async function authFetch(path, opt = {}) {
       headers,
     });
 
-    if (res.status === 401) {
+    if (res.status === 401 && !redirectLoading) {
+      redirectLoading = true;
       alert("로그인이 필요합니다.");
-      deleteAccessToken();
       window.location.href = "/login";
     }
 
