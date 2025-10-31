@@ -1,27 +1,28 @@
+import { authClient } from "../api/apiClient.js";
 import { logout } from "../api/loginApi.js";
 import { getAccessToken } from "../api/sessionStorage.js";
 
 const pages = {
   NON_AUTH: ["signin", "login"],
-  // AUTH: ["post-list", "post-create", "post"],
+  AUTH: ["post-list", "post-form", "post"],
 };
 
 const HOME = "post-list";
 const LOGIN = "login";
 
-(function () {
-  const at = getAccessToken(); // 콜백 함수로 이후 기능 구현 필요
-  const goto = (url, msg) => {
-    if (msg) alert(msg);
-    if (url === currentPath) return;
-    window.location.href = `/${url}`;
-  };
+// (function () {
+//   const at = getAccessToken(); // 콜백 함수로 이후 기능 구현 필요
+//   const goto = (url, msg) => {
+//     if (msg) alert(msg);
+//     if (url === currentPath) return;
+//     window.location.href = `/${url}`;
+//   };
 
-  const currentPath = window.location.pathname.split("/")[1];
-  // const isAuth = pages.AUTH.includes(currentPath);
-  const isNon = pages.NON_AUTH.includes(currentPath);
-  if (isNon && at) goto(HOME, "로그인 된 상태입니다. 홈으로 이동합니다.");
-})();
+//   const currentPath = window.location.pathname.split("/")[1];
+//   // const isAuth = pages.AUTH.includes(currentPath);
+//   const isNon = pages.NON_AUTH.includes(currentPath);
+//   if (isNon && at) goto(HOME, "로그인 된 상태입니다. 홈으로 이동합니다.");
+// })();
 let avatar;
 let dropdown;
 
@@ -38,19 +39,27 @@ async function insertHeader() {
   mount.appendChild(t.content.firstElementChild);
 
   const titleText = document.querySelector(".h-title");
-  const token = getAccessToken();
-  avatar = document.getElementById("h-avatar");
-  if (token) {
-    dropdown = document.querySelector("#profileMenu");
 
-    const logoutBtn = document.querySelector("#menuLogout");
-    logoutBtn.addEventListener("click", logout);
-  } else {
-    avatar.hidden = true;
+  const currentPath = window.location.pathname.split("/")[1];
+  const isAuth = pages.AUTH.includes(currentPath);
+  if (isAuth) {
+    const apiRes = await authClient.get("/users/profile");
+    const dto = await apiRes.json();
+
+    if (dto) {
+      avatar = document.getElementById("h-avatar");
+
+      dropdown = document.querySelector("#profileMenu");
+
+      const logoutBtn = document.querySelector("#menuLogout");
+      logoutBtn.addEventListener("click", logout);
+    } else {
+      avatar.hidden = true;
+    }
+    titleText.addEventListener("click", (e) => {
+      window.location.href = getAccessToken() ? HOME : LOGIN;
+    });
   }
-  titleText.addEventListener("click", (e) => {
-    window.location.href = getAccessToken() ? HOME : LOGIN;
-  });
 }
 document.addEventListener("DOMContentLoaded", async () => {
   await insertHeader();
@@ -60,7 +69,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("/semantics/footer/footer.html");
     const html = await res.text();
     const t = document.createElement("template");
-    console.log(t);
     t.innerHTML = html.trim();
     mount.appendChild(t.content.firstElementChild);
   })();
