@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- 기본 형식의 템플릿 입니다. 우선 이 구조를 복사해서 사용할 것입니다. -->
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16x16.png"
+    />
+    <title>게임 인사이드 - 게시글 보기</title>
+    <link rel="stylesheet" href="/pages/post/post.css" />
+    <link rel="stylesheet" href="/semantics/header/header.css" />
+    <link rel="stylesheet" href="/semantics/footer/footer.css" />
+    <link rel="stylesheet" href="/semantics/main/main.css" />
+    <script defer type="module" src="/pages/post/post.js"></script>
+    <script defer type="module" src="/semantics/common.js"></script>
+  </head>
+  <body>
+    <header id="app-header"></header>
+    <main>
+      <article class="post"></article>
+
+      <!-- 댓글 작성 -->
+      <section class="comment-write card">
+        <label class="label" for="comment">댓글을 남겨주세요!</label>
+        <textarea
+          id="comment"
+          class="textarea"
+          placeholder="댓글을 입력하세요."
+        ></textarea>
+        <div class="actions r">
+          <button class="btn primary">댓글 등록</button>
+        </div>
+      </section>
+
+      <!-- 댓글 리스트 -->
+      <ul class="comment-list">
+        <li class="comment card">
+          <div class="c-head">
+            <span class="avatar sm"></span>
+            <strong class="name">더미 작성자 1</strong>
+            <time class="time">2021-01-01 00:00:00</time>
+            <div class="gap"></div>
+            <button class="btn ghost sm">수정</button>
+            <button class="btn danger sm btnCommentDelete">삭제</button>
+          </div>
+          <p class="c-body">댓글 내용</p>
+        </li>
+        <!-- 반복 -->
+      </ul>
+    </main>
+
+    <!-- 삭제 확인 모달: 게시글 -->
+    <dialog id="dlgPostDelete" class="confirm">
+      <h3>게시글을 삭제하시겠습니까?</h3>
+      <p class="sub">삭제한 내용은 복구할 수 없습니다.</p>
+      <div class="confirm-actions">
+        <button class="btn ghost" data-cancel>취소</button>
+        <button class="btn danger" data-ok>확인</button>
+      </div>
+    </dialog>
+
+    <!-- 삭제 확인 모달: 댓글 -->
+    <dialog id="dlgCommentDelete" class="confirm">
+      <h3>댓글을 삭제하시겠습니까?</h3>
+      <p class="sub">삭제한 내용은 복구할 수 없습니다.</p>
+      <div class="confirm-actions">
+        <button class="btn ghost" data-cancel>취소</button>
+        <button class="btn danger" data-ok>확인</button>
+      </div>
+    </dialog>
+    <footer id="app-footer">
+      <div class="f-wrap"></div>
+    </footer>
+  </body>
+</html>

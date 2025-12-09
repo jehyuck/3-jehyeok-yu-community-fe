@@ -1,0 +1,54 @@
+name: FE CI-CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: npm install
+        run: |
+
+      - name: docker build
+        uses: docker/login-action@v3
+        with:
+          registry: registry.${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: docker push
+        run: |
+          docker build -t registry.${{ secrets.SERVER_HOST }}/community-fe .
+          docker push registry.${{ secrets.SERVER_HOST }}/community-fe
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: ssh key 세팅
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: ssh 로그인 및 도커 pull and up
+        run: |
+          ssh -i ~/.ssh/id_rsa  ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << OUTER
+            cd /home/${{ secrets.SERVER_USER }}
+            ssh -i ~/${{ secrets.TUNNELING_KEY }}  ${{ secrets.TUNNELING_SERVER_USER }}@${{ secrets.TUNNELING_SERVER_HOST }} << INNER
+              cd /home/${{ secrets.TUNNELING_SERVER_USER }}/compose/app
+              echo "${{ secrets.DOCKER_TOKEN }}" | docker login registry.${{ secrets.SERVER_HOST}} -u "${{ secrets.DOCKER_USER }}" --password-stdin
+              docker compose pull community-fe
+              docker compose up -d community-fe
+          INNER
+          OUTER

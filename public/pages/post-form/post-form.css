@@ -1,0 +1,100 @@
+/* 카드 컨테이너 */
+.compose {
+  max-width: 720px;
+  margin: 24px auto 0;
+}
+.compose-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.compose-form {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+/* 필드 공통 */
+.field {
+  display: grid;
+  gap: 8px;
+}
+.label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  outline: none;
+}
+.input:focus,
+.textarea:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+.textarea {
+  min-height: 220px; /* 시안처럼 넉넉하게 */
+  resize: vertical;
+}
+.helper {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* 파일 입력 */
+.file {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+.file input {
+  display: none;
+}
+.file-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f9fafb;
+  cursor: pointer;
+}
+.file-name {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* 버튼 */
+.actions {
+  margin-top: 6px;
+}
+.btn.full {
+  width: 100%;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .compose {
+    margin-top: 12px;
+  }
+  .compose-form {
+    padding: 16px;
+  }
+}

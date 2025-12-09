@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16x16.png"
+    />
+    <title>게임 인사이드 - 글 목록</title>
+    <link rel="stylesheet" href="/semantics/header/header.css" />
+    <link rel="stylesheet" href="/semantics/footer/footer.css" />
+    <link rel="stylesheet" href="/semantics/main/main.css" />
+    <link rel="stylesheet" href="/pages/post-list/post-list.css" />
+    <script defer type="module" src="/semantics/common.js"></script>
+    <script defer type="module" src="/pages/post-list/post-list.js"></script>
+  </head>
+  <body>
+    <header id="app-header"></header>
+    <main>
+      <!-- 상단 인트로 + 작성 버튼 -->
+      <section class="intro">
+        <p class="greet">
+          안녕하세요,<br />
+          <strong>게임 인사이드 게시판</strong>입니다.
+        </p>
+        <a class="btn primary write-btn" href="/post-form">게시글 작성</a>
+      </section>
+
+      <!-- 리스트 -->
+      <section class="post-list" id="postList"></section>
+
+      <div id="sentinel" aria-hidden="true">
+        <div id="loader" style="display: none">
+          <div class="spinner"></div>
+          <span class="loading-text">로딩 중...</span>
+        </div>
+        <div id="end-of-list" style="display: none">
+          더 이상 게시글이 없습니다
+        </div>
+      </div>
+    </main>
+    <footer id="app-footer">
+      <div class="f-wrap"></div>
+    </footer>
+  </body>
+</html>

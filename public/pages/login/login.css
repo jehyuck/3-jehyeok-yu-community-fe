@@ -1,0 +1,110 @@
+/* ========== Login Page Only ========== */
+/* 공통 변수(main.css가 없을 때도 안전하게 기본값 제공) */
+:root {
+  --border: var(--border, #e5e7eb);
+  --text: var(--text, #111827);
+  --muted: var(--muted, #6b7280);
+  --brand: var(--brand, #6366f1);
+  --card-bg: #fff;
+}
+
+/* 카드 래퍼 */
+.auth {
+  width: 100%;
+  max-width: 420px;
+  margin: 48px auto 0;
+  padding: 24px 24px 28px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card-bg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+/* 제목 */
+.auth-title {
+  margin: 0 0 20px;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  color: var(--text);
+}
+
+/* 폼 */
+.auth-form {
+  display: grid;
+  gap: 14px;
+}
+
+/* 폼 필드 */
+.field {
+  display: grid;
+  gap: 6px;
+}
+.label {
+  font-size: 12px;
+  color: var(--muted);
+}
+.input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+  box-sizing: border-box;
+}
+.input:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* 헬퍼/에러 */
+.helper {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.helper.error {
+  color: #dc2626;
+} /* 필요 시 */
+
+/* 액션 버튼 */
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 6px;
+}
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn.primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+.btn.link {
+  background: transparent;
+  border: none;
+  color: var(--brand);
+  height: auto;
+  padding: 0;
+  justify-content: center;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+  .auth {
+    margin-top: 28px;
+    padding: 20px;
+  }
+}

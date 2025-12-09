@@ -1,0 +1,106 @@
+:root {
+  --header-h: 56px; /* header.css와 맞추기 */
+  --main-w: 960px; /* 공통 컨테이너 폭 */
+  --gutter: 16px; /* 좌우 여백 */
+  --border: #e5e7eb;
+  --text: #111827;
+  --muted: #6b7280;
+  --brand: #6366f1;
+  --bg: #ffffff;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: url("/assets/background_half.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 모든 페이지 공통 main */
+main {
+  max-width: var(--main-w);
+  margin: 0 auto;
+  padding: calc(var(--header-h) + 24px) var(--gutter) 64px;
+  box-sizing: border-box;
+  min-height: calc(100dvh - var(--header-h));
+
+  /* 살짝 떠있는 효과 */
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* 유틸(원하면 재사용) */
+.container {
+  max-width: var(--main-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn.primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --main-w: 100%;
+  }
+  main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* 헤더 스타일 - 가장 높은 곳에 있는 것처럼 */
+#app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+#app-footer {
+  border-top: 1px solid rgba(229, 231, 235, 0.5);
+  background: rgba(250, 250, 250, 0.95);
+  padding: 16px 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.f-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+  min-height: 40px; /* 이게 포인트. 레이아웃 자리 고정 */
+}

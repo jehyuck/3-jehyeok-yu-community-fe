@@ -1,0 +1,136 @@
+/* 상단 인트로 */
+.intro {
+  position: relative;
+  text-align: center;
+  margin: 8px 0 18px;
+}
+.greet {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text);
+}
+.greet strong {
+  font-weight: 800;
+}
+.write-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* 리스트 */
+.post-list {
+  display: grid;
+  gap: 14px;
+}
+
+/* 카드 */
+.post-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  padding: 14px;
+}
+
+/* 카드 상단: 제목 / 날짜 */
+.card-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+.title {
+  margin: 0 0 4px;
+  font-weight: 800;
+  font-size: 16px;
+}
+.time {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 메타(좋아요/댓글/조회수) */
+.meta {
+  display: inline-flex;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  margin: 2px 0 10px;
+}
+
+/* 카드 하단: 작성자 */
+.card-foot {
+  display: grid;
+  grid-template-columns: 32px auto;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: linear-gradient(#f3f4f6, #e5e7eb);
+}
+.author {
+  font-weight: 600;
+}
+
+/* 로딩 스피너 */
+#loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  gap: 12px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #6366f1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 끝 메시지 */
+#end-of-list {
+  text-align: center;
+  padding: 24px 16px;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .intro {
+    text-align: left;
+  }
+  .write-btn {
+    position: static;
+    margin-top: 8px;
+  }
+  .card-head {
+    grid-template-columns: 1fr;
+  }
+  .time {
+    justify-self: start;
+  }
+}
